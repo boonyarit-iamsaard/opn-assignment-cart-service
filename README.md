@@ -84,12 +84,12 @@ cart.count() // 2
 ```
 
 ## Prerequisite
-- Required Node.js 18.x or later
-- Required pnpm 8.9.x or later
+- Required Node.js 18.x or later.
+- Required pnpm 8.9.x or later.
 
 ## Setup
 
-Run the following command to install dependencies
+Run the following command to install dependencies.
 
 ```sh
 pnpm install
@@ -97,7 +97,7 @@ pnpm install
 
 ## Test
 
-Run the following command to run test
+Run the following command to run test.
 
 ```sh
 pnpm test
@@ -105,5 +105,5 @@ pnpm test
 
 ## Roadmap
 
-- [ ] Implement CI/CD
-- [ ] Publish to npm
+- [ ] Add CI/CD pipeline
+- [ ] Publish package to npm
