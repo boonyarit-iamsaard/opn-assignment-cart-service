@@ -1,0 +1,14 @@
+{
+  "name": "@repo/cart",
+  "version": "0.0.1",
+  "scripts": {
+    "test": "vitest run --reporter=verbose",
+    "test:watch": "vitest"
+  },
+  "dependencies": {
+    "typescript": "^5.3.3"
+  },
+  "devDependencies": {
+    "vitest": "^1.6.0"
+  }
+}
