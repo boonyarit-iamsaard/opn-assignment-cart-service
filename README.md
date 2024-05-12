@@ -83,6 +83,12 @@ cart.has(2) // true
 cart.count() // 2
 ```
 
+**Requirements**
+- Your code should be executable on console or unit test.
+- No need to connect to any storage or database.
+- Validation is not required.
+- Negative cases have additional score.
+
 ## Prerequisite
 - Required Node.js 18.x or later.
 - Required pnpm 8.9.x or later.
