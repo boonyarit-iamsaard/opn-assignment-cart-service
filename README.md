@@ -1,81 +1,109 @@
-# Turborepo starter
+# Cart Service
 
-This is an official starter Turborepo.
+## Assignment
 
-## Using this example
+Write a service called `Cart` which serve usage listed below.
 
-Run the following command:
+**Basic** - Cart service that can manage items.
+
+```javascript
+// Create cart object
+cart = Cart.create(customer_id)
+
+// Add or increase item quantity in cart by product id.
+cart.add(product_id, quantity)
+
+// Replace item quantity or remove item from cart by product id.
+cart.update(product_id, quantity)
+
+// Delete item from cart by product id.
+cart.remove(product_id)
+
+// Delete cart object.
+cart.destroy()
+```
+
+**Utilities** - Functions that save consumers effort.
+
+```javascript
+// Check id product is already in cart, boolean returned.
+has = cart.has(product_id)
+
+// Check if cart contains any items, boolean returned.
+isEmpty = cart.isEmpty()
+
+// Display list of items and quantity, json returned.
+count = cart.count()
+
+// Get number of different items, int returned.
+quantity = cart.quantity()
+
+// Get amount of total items, int returned.
+total = cart.total()
+```
+
+**Discount** - Sometimes customer apply coupon or voucher.
+- `addDiscount` - Apply a promotion to cart that effect directly to `total`
+  - Accept 2 parameters
+    - `name` - An identifier.
+    - `discount` - A parameters to be calculated.
+        - Case1: Deduct 50.- total
+            - `{type: "fixed", amount: 50}`
+        - Case2: Deduct 10% from total but not over 100.-
+            - `{type: "percentage", amount: 10, max: 100}`
+- `removeDiscount` - Remove promotion by name.
+
+```javascript
+discount = {type: "percentage", amount: 10, max: 100}
+
+total = cart.total() // 2500
+
+cart.addDiscount(name, discount)
+total = cart.total() // 2400
+
+cart.removeDiscount(name);
+total = cart.total() // 2500
+```
+
+**Freebie** - "Buy A get B for free!"
+- `addFreebie` - Apply a promotion to cart that effect directly to `items`
+  - Accept 3 parameters
+    - `name` - An identifier.
+    - `condition` - A validation rule cart should applied to get reward.
+    - `reward` - A return if cart applied to condition
+
+```javascript
+cart.add(1, 1)
+
+condition = {type: "contains", product_id: 1}
+reward = {product_id: 2, quantity: 1}
+cart.addFreebie(name, condition, reward)
+
+cart.has(2) // true
+cart.count() // 2
+```
+
+## Prerequisite
+- Required Node.js 18.x or later
+- Required pnpm 8.9.x or later
+
+## Setup
+
+Run the following command to install dependencies
 
 ```sh
-npx create-turbo@latest
+pnpm install
 ```
 
-## What's inside?
+## Test
 
-This Turborepo includes the following packages/apps:
+Run the following command to run test
 
-### Apps and Packages
-
-- `docs`: a [Next.js](https://nextjs.org/) app
-- `web`: another [Next.js](https://nextjs.org/) app
-- `@repo/ui`: a stub React component library shared by both `web` and `docs` applications
-- `@repo/eslint-config`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
-- `@repo/typescript-config`: `tsconfig.json`s used throughout the monorepo
-
-Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
-
-### Utilities
-
-This Turborepo has some additional tools already setup for you:
-
-- [TypeScript](https://www.typescriptlang.org/) for static type checking
-- [ESLint](https://eslint.org/) for code linting
-- [Prettier](https://prettier.io) for code formatting
-
-### Build
-
-To build all apps and packages, run the following command:
-
-```
-cd my-turborepo
-pnpm build
+```sh
+pnpm test
 ```
 
-### Develop
+## Roadmap
 
-To develop all apps and packages, run the following command:
-
-```
-cd my-turborepo
-pnpm dev
-```
-
-### Remote Caching
-
-Turborepo can use a technique known as [Remote Caching](https://turbo.build/repo/docs/core-concepts/remote-caching) to share cache artifacts across machines, enabling you to share build caches with your team and CI/CD pipelines.
-
-By default, Turborepo will cache locally. To enable Remote Caching you will need an account with Vercel. If you don't have an account you can [create one](https://vercel.com/signup), then enter the following commands:
-
-```
-cd my-turborepo
-npx turbo login
-```
-
-This will authenticate the Turborepo CLI with your [Vercel account](https://vercel.com/docs/concepts/personal-accounts/overview).
-
-Next, you can link your Turborepo to your Remote Cache by running the following command from the root of your Turborepo:
-
-```
-npx turbo link
-```
-
-## Useful Links
-
-Learn more about the power of Turborepo:
-
-- [Tasks](https://turbo.build/repo/docs/core-concepts/monorepos/running-tasks)
-- [Caching](https://turbo.build/repo/docs/core-concepts/caching)
-- [Remote Caching](https://turbo.build/repo/docs/core-concepts/remote-caching)
-- [Filtering](https://turbo.build/repo/docs/core-concepts/monorepos/filtering)
-- [Configuration Options](https://turbo.build/repo/docs/reference/configuration)
-- [CLI Usage](https://turbo.build/repo/docs/reference/command-line-reference)
+- [ ] Implement CI/CD
+- [ ] Publish to npm
